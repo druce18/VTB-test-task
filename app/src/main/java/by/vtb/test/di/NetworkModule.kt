@@ -19,7 +19,11 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(CONNECT_TIMEOUT_IN_MS, TimeUnit.MILLISECONDS)
+        builder
+            .connectTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .readTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .writeTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .hostnameVerifier { _, _ -> true }
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -48,6 +52,6 @@ class NetworkModule {
 
     companion object {
 
-        private const val CONNECT_TIMEOUT_IN_MS = 30000L
+        private const val CONNECT_TIMEOUT_IN_SEC = 30L
     }
 }

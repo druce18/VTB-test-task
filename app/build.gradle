@@ -12,7 +12,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         buildConfigField "String", "BASE_URL", "\"https://89.208.230.60\""
     }
@@ -68,10 +68,6 @@ dependencies {
     def lifecycle_version = "2.3.1"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // Saved state module for ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 

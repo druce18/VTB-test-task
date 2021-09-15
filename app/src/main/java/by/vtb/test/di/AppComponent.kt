@@ -1,13 +1,21 @@
 package by.vtb.test.di
 
-import by.vtb.test.ui.MainActivity
 import by.vtb.test.VtbTestApplication
+import by.vtb.test.ui.MainActivity
+import by.vtb.test.ui.pager.VideoLinksFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, AppModuleBind::class, NetworkModule::class])
+@Component(
+    modules = [
+        AppModule::class,
+        AppModuleBind::class,
+        NetworkModule::class,
+        ViewModelModule::class
+    ]
+)
 interface AppComponent {
 
     @Component.Builder
@@ -21,4 +29,5 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
 
+    fun inject(fragment: VideoLinksFragment)
 }
