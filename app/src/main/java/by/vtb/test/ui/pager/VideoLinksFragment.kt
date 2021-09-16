@@ -42,18 +42,17 @@ class VideoLinksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         lifecycleScope.launchWhenResumed {
             viewModel.uiState.collect { uiState ->
-                showData(uiState)
+                showState(uiState)
             }
         }
     }
 
-    private fun showData(uiState: UiState<VideoLinks>) {
+    private fun showState(uiState: UiState<VideoLinks>) {
         when (uiState) {
             is UiState.Success -> {
-                showPager(uiState)
+                showPagerWithVideo(uiState)
             }
             is UiState.Loading -> {
                 binding.progressBar.setVisible()
@@ -64,7 +63,7 @@ class VideoLinksFragment : Fragment() {
         }
     }
 
-    private fun showPager(uiState: UiState.Success<VideoLinks>) {
+    private fun showPagerWithVideo(uiState: UiState.Success<VideoLinks>) {
         videoLinksAdapter = VideoLinksPagerAdapter(uiState.data, this)
         with(binding) {
             progressBar.setGone()
@@ -92,6 +91,7 @@ class VideoLinksFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        videoLinksAdapter = null
     }
 
     companion object {
