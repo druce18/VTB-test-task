@@ -1,4 +1,4 @@
-# VTB-test-task
+# VTB test task
 ### Test task for VTB
 
 Сделать приложение, на главном экране которого будет pageview с 4 страницами. 

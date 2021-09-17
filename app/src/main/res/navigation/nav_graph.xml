@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph"
+    app:startDestination="@id/videoLinksFragment">
+
+    <fragment
+        android:id="@+id/videoLinksFragment"
+        android:name="by.vtb.test.ui.pager.VideoLinksFragment"
+        android:label="fragment_video_links"
+        tools:layout="@layout/fragment_video_links" />
+
+</navigation>
