@@ -52,6 +52,6 @@ class NetworkModule {
 
     companion object {
 
-        private const val CONNECT_TIMEOUT_IN_SEC = 30L
+        private const val CONNECT_TIMEOUT_IN_SEC = 10L
     }
 }

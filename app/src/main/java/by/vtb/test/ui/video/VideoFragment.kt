@@ -9,7 +9,7 @@ import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoBinding
-import by.vtb.test.extention.showSnackbarIndefinite
+import by.vtb.test.extention.showSnackbarErrorIndefinite
 
 class VideoFragment : Fragment() {
 
@@ -47,7 +47,7 @@ class VideoFragment : Fragment() {
                 mediaController.show(TIMEOUT_SHOW_MS)
             }
             videoView.setOnErrorListener { _, _, _ ->
-                videoFragment.showSnackbarIndefinite(R.string.error_loading, R.string.close)
+                videoFragment.showSnackbarErrorIndefinite(R.string.error_loading, R.string.close)
                 true
             }
             videoFragment.setOnClickListener {

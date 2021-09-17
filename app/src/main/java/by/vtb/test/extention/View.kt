@@ -1,7 +1,11 @@
 package by.vtb.test.extention
 
+import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import by.vtb.test.R
 import com.google.android.material.snackbar.Snackbar
 
 fun View.setVisible() {
@@ -16,14 +20,24 @@ fun View.setGone() {
     visibility = View.GONE
 }
 
-fun View.showSnackbarIndefinite(
+fun View.showSnackbarErrorIndefinite(
     @StringRes massage: Int,
     @StringRes nameAction: Int,
     action: (() -> Unit)? = null
 ) {
     val snackbar = Snackbar.make(this, massage, Snackbar.LENGTH_INDEFINITE)
-    snackbar.setAction(nameAction) {
-        action?.invoke() ?: snackbar.dismiss()
+    with(snackbar) {
+        val snackbarTextView: TextView = view.findViewById(R.id.snackbar_text)
+        snackbarTextView.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.snackbar_text)
+        )
+        val redColor = ContextCompat.getColor(context, R.color.red_error)
+        setTextColor(redColor)
+        setActionTextColor(redColor)
+        setAction(nameAction) {
+            action?.invoke() ?: dismiss()
+        }
+        show()
     }
-    snackbar.show()
 }

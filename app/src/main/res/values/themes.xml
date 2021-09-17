@@ -12,9 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="snackbarStyle">@style/Widget.SnackBar</item>
     </style>
 
-    <style name="Theme.VTBTestTask.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Widget.SnackBar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">4dp</item>
+    </style>
 
-    <style name="Theme.VTBTestTask.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoLinksBinding
 import by.vtb.test.extention.appComponent
-import by.vtb.test.extention.showSnackbarIndefinite
+import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.repository.model.VideoLinks
@@ -77,7 +77,7 @@ class VideoLinksFragment : Fragment() {
     private fun showError(uiState: UiState.Error) {
         with(binding) {
             progressBar.setGone()
-            videoLinksFragment.showSnackbarIndefinite(R.string.error, R.string.refresh) {
+            videoLinksFragment.showSnackbarErrorIndefinite(R.string.error, R.string.refresh) {
                 viewModel.loadVideoLinks()
             }
         }
