@@ -2,7 +2,9 @@ package by.vtb.test.repository
 
 import by.vtb.test.repository.model.VideoLinks
 
-interface VideoLinksRepository {
+interface VideoRepository {
 
     suspend fun videoLinks(): VideoLinks
+
+    suspend fun loadVideo(videoUrl: String): String
 }

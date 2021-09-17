@@ -3,6 +3,7 @@ package by.vtb.test.di
 import by.vtb.test.VtbTestApplication
 import by.vtb.test.ui.MainActivity
 import by.vtb.test.ui.pager.VideoLinksFragment
+import by.vtb.test.ui.video.VideoFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -30,4 +31,6 @@ interface AppComponent {
     fun inject(activity: MainActivity)
 
     fun inject(fragment: VideoLinksFragment)
+
+    fun inject(fragment: VideoFragment)
 }

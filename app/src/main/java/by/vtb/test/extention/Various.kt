@@ -9,3 +9,7 @@ val Context.appComponent: AppComponent
         is VtbTestApplication -> appComponent
         else -> this.applicationContext.appComponent
     }
+
+fun String.nameFromUrl(): String {
+    return this.substring(this.lastIndexOf('/') + 1, this.length)
+}

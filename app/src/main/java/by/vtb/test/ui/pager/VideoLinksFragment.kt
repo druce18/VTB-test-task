@@ -12,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoLinksBinding
 import by.vtb.test.extention.appComponent
-import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
+import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.repository.model.VideoLinks
 import by.vtb.test.ui.UiState
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,7 +35,7 @@ class VideoLinksFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVideoLinksBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -77,7 +77,7 @@ class VideoLinksFragment : Fragment() {
     private fun showError(uiState: UiState.Error) {
         with(binding) {
             progressBar.setGone()
-            videoLinksFragment.showSnackbarErrorIndefinite(R.string.error, R.string.refresh) {
+            videoLinksFragment.showSnackbarErrorIndefinite(uiState.message, R.string.refresh) {
                 viewModel.loadVideoLinks()
             }
         }

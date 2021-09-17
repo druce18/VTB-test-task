@@ -21,7 +21,7 @@ fun View.setGone() {
 }
 
 fun View.showSnackbarErrorIndefinite(
-    @StringRes massage: Int,
+    massage: String,
     @StringRes nameAction: Int,
     action: (() -> Unit)? = null
 ) {

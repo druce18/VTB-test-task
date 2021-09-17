@@ -3,6 +3,7 @@ package by.vtb.test.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import by.vtb.test.ui.pager.VideoLinksViewModel
+import by.vtb.test.ui.video.VideoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,4 +18,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(VideoLinksViewModel::class)
     abstract fun videoLinksViewModel(viewModel: VideoLinksViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VideoViewModel::class)
+    abstract fun videoViewModel(viewModel: VideoViewModel): ViewModel
 }
