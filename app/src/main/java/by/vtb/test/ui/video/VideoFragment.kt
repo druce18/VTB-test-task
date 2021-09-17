@@ -9,7 +9,7 @@ import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoBinding
-import by.vtb.test.extention.showSnackbarLong
+import by.vtb.test.extention.showSnackbarIndefinite
 
 class VideoFragment : Fragment() {
 
@@ -46,16 +46,14 @@ class VideoFragment : Fragment() {
             videoView.setOnCompletionListener {
                 mediaController.show(TIMEOUT_SHOW_MS)
             }
-            videoView.setOnErrorListener { mediaPlayer, i, i2 ->
-                videoFragment.showSnackbarLong(R.string.error_loading)
+            videoView.setOnErrorListener { _, _, _ ->
+                videoFragment.showSnackbarIndefinite(R.string.error_loading, R.string.close)
                 true
             }
+            videoFragment.setOnClickListener {
+                mediaController.show()
+            }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.videoView.stopPlayback()
     }
 
     override fun onDestroyView() {

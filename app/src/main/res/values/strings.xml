@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">VTB test task</string>
     <string name="refresh">Refresh</string>
-    <string name="end_video">End of Video</string>
-    <string name="media_loaded_and_ready">Media file loaded and ready to go</string>
+    <string name="close">Close</string>
+    <string name="error">Error!</string>
     <string name="error_loading">Error loading media file</string>
 </resources>

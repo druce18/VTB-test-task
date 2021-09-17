@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import by.vtb.test.repository.VideoLinksRepository
 import by.vtb.test.repository.model.VideoLinks
 import by.vtb.test.ui.UiState
+import by.vtb.test.ui.getUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,11 +26,8 @@ class VideoLinksViewModel @Inject constructor(
     fun loadVideoLinks() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            val result = try {
-                val videoLinks = videoLinksRepository.videoLinks()
-                UiState.Success(videoLinks)
-            } catch (e: Exception) {
-                UiState.Error()
+            val result = getUiState {
+                videoLinksRepository.videoLinks()
             }
             _uiState.value = result
         }

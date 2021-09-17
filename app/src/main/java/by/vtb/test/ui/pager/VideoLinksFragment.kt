@@ -12,11 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoLinksBinding
 import by.vtb.test.extention.appComponent
+import by.vtb.test.extention.showSnackbarIndefinite
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.repository.model.VideoLinks
 import by.vtb.test.ui.UiState
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -75,12 +75,12 @@ class VideoLinksFragment : Fragment() {
     }
 
     private fun showError(uiState: UiState.Error) {
-        binding.progressBar.setGone()
-        val snackbar = Snackbar.make(binding.videoLinksFragment, uiState.message, Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction(R.string.refresh) {
-            viewModel.loadVideoLinks()
+        with(binding) {
+            progressBar.setGone()
+            videoLinksFragment.showSnackbarIndefinite(R.string.error, R.string.refresh) {
+                viewModel.loadVideoLinks()
+            }
         }
-        snackbar.show()
     }
 
     override fun onAttach(context: Context) {

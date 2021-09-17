@@ -10,7 +10,7 @@ class VideoLinksPagerAdapter(
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = ITEM_COUNT
 
     override fun createFragment(position: Int): Fragment {
         val nameAndLinkFromPos = getNameAndLinkFromPos(position)
@@ -22,12 +22,21 @@ class VideoLinksPagerAdapter(
 
     fun getNameAndLinkFromPos(position: Int): Pair<String, String> {
         return when (position) {
-            0 -> Pair("single", videoLinks.single)
-            1 -> Pair("splitV", videoLinks.splitV)
-            2 -> Pair("splitH", videoLinks.splitH)
+            0 -> Pair(SINGLE_NAME_TAB, videoLinks.single)
+            1 -> Pair(SPLIT_V_NAME_TAB, videoLinks.splitV)
+            2 -> Pair(SPLIT_H_NAME_TAB, videoLinks.splitH)
             else -> {
-                Pair("src", videoLinks.src)
+                Pair(SRC_NAME_TAB, videoLinks.src)
             }
         }
+    }
+
+    companion object {
+
+        private const val ITEM_COUNT = 4
+        private const val SINGLE_NAME_TAB = "single"
+        private const val SPLIT_V_NAME_TAB = "splitV"
+        private const val SPLIT_H_NAME_TAB = "splitH"
+        private const val SRC_NAME_TAB = "src"
     }
 }
