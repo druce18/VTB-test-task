@@ -41,6 +41,7 @@ class VideoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        settingVideoView()
         arguments?.let { arg ->
             arg.getString(ARG_LINK)?.let { link ->
                 viewModel.loadVideo(link)
@@ -53,10 +54,18 @@ class VideoFragment : Fragment() {
         }
     }
 
+    private fun setUri(uiState: UiState.Success<String>) {
+        with(binding) {
+            progressBar.setGone()
+            val uri = Uri.parse(uiState.data)
+            videoView.setVideoURI(uri)
+        }
+    }
+
     private fun showState(uiState: UiState<String>) {
         when (uiState) {
             is UiState.Success -> {
-                settingVideoView(uiState.data)
+                setUri(uiState)
             }
             is UiState.Loading -> {
                 binding.progressBar.setVisible()
@@ -67,10 +76,15 @@ class VideoFragment : Fragment() {
         }
     }
 
-    private fun settingVideoView(link: String) {
+    private fun showError(uiState: UiState.Error) {
         with(binding) {
             progressBar.setGone()
-            videoView.setVideoURI(Uri.parse(link))
+            videoFragment.showSnackbarErrorIndefinite(uiState.message, R.string.close)
+        }
+    }
+
+    private fun settingVideoView() {
+        with(binding) {
             videoView.setZOrderOnTop(true)
             val mediaController = MediaController(requireContext())
             videoView.setMediaController(mediaController)
@@ -82,19 +96,12 @@ class VideoFragment : Fragment() {
                 mediaController.show(TIMEOUT_SHOW_MS)
             }
             videoView.setOnErrorListener { _, _, _ ->
-                videoFragment.showSnackbarErrorIndefinite(getString(R.string.error_loading), R.string.close)
+                videoView.showSnackbarErrorIndefinite(getString(R.string.error_loading), R.string.close)
                 true
             }
             videoFragment.setOnClickListener {
                 mediaController.show()
             }
-        }
-    }
-
-    private fun showError(uiState: UiState.Error) {
-        with(binding) {
-            progressBar.setGone()
-            videoFragment.showSnackbarErrorIndefinite(uiState.message, R.string.close)
         }
     }
 

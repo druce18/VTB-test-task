@@ -2,6 +2,5 @@
     <string name="app_name">VTB test task</string>
     <string name="refresh">Refresh</string>
     <string name="close">Close</string>
-    <string name="error">Error!</string>
     <string name="error_loading">Error loading media file</string>
 </resources>

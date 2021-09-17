@@ -16,7 +16,7 @@
     </style>
 
     <style name="Widget.SnackBar" parent="Widget.MaterialComponents.Snackbar">
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">12dp</item>
     </style>
 
 </resources>
