@@ -27,10 +27,6 @@ class VideoViewModel @AssistedInject constructor(
     private val _uiState = MutableStateFlow<UiState<String>>(UiState.Loading)
     val uiState: StateFlow<UiState<String>> = _uiState.asStateFlow()
 
-    init {
-        loadVideo()
-    }
-
     fun loadVideo() = viewModelScope.launch(mainDispatcher) {
         link.value?.let { videoUrl ->
             _uiState.value = UiState.Loading

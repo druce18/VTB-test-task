@@ -1,7 +1,9 @@
 package by.vtb.test.extention
 
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -27,6 +29,9 @@ fun View.showSnackbarErrorIndefinite(
 ) {
     val snackbar = Snackbar.make(this, massage, Snackbar.LENGTH_INDEFINITE)
     with(snackbar) {
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        view.layoutParams = params
         val snackbarTextView: TextView = view.findViewById(R.id.snackbar_text)
         snackbarTextView.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,

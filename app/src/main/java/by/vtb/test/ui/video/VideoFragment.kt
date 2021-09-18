@@ -44,12 +44,14 @@ class VideoFragment : BaseFragment() {
         }
     }
 
-    private fun setUri(uiState: UiState.Success<String>) {
-        with(binding) {
-            progressBar.setGone()
-            val uri = Uri.parse(uiState.data)
-            videoView.setVideoURI(uri)
-        }
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadVideo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.videoView.setVideoURI(null)
     }
 
     private fun showState(uiState: UiState<String>) {
@@ -66,6 +68,14 @@ class VideoFragment : BaseFragment() {
         }
     }
 
+    private fun setUri(uiState: UiState.Success<String>) {
+        with(binding) {
+            progressBar.setGone()
+            val uri = Uri.parse(uiState.data)
+            videoView.setVideoURI(uri)
+        }
+    }
+
     private fun showError(uiState: UiState.Error) {
         with(binding) {
             progressBar.setGone()
@@ -75,8 +85,10 @@ class VideoFragment : BaseFragment() {
 
     private fun settingVideoView() {
         with(binding) {
+            videoView.requestFocus()
             videoView.setZOrderOnTop(true)
             val mediaController = MediaController(requireContext())
+            mediaController.setAnchorView(videoView)
             videoView.setMediaController(mediaController)
             videoView.setOnPreparedListener {
                 videoView.seekTo(PREVIEW_VIDEO_MS)
@@ -108,7 +120,7 @@ class VideoFragment : BaseFragment() {
     companion object {
 
         private const val TIMEOUT_SHOW_MS = 60000
-        private const val PREVIEW_VIDEO_MS = 1
+        private const val PREVIEW_VIDEO_MS = 0
 
         fun newInstance(link: String) =
             VideoFragment().apply {

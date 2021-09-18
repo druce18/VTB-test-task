@@ -3,7 +3,6 @@ package by.vtb.test.ui.base
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
-import java.lang.NullPointerException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
