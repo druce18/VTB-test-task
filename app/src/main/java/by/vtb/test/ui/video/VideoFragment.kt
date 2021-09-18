@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoBinding
@@ -17,16 +15,13 @@ import by.vtb.test.extention.appComponent
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
-import by.vtb.test.ui.UiState
+import by.vtb.test.ui.base.BaseFragment
+import by.vtb.test.ui.base.UiState
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
 
-class VideoFragment : Fragment() {
+class VideoFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: VideoViewModel by viewModels { viewModelFactory }
-
+    private val viewModel: VideoViewModel by viewModels()
     private var _binding: FragmentVideoBinding? = null
     private val binding: FragmentVideoBinding
         get() = _binding!!
@@ -42,12 +37,7 @@ class VideoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         settingVideoView()
-        arguments?.let { arg ->
-            arg.getString(ARG_LINK)?.let { link ->
-                viewModel.loadVideo(link)
-            }
-        }
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 showState(uiState)
             }
@@ -117,16 +107,13 @@ class VideoFragment : Fragment() {
 
     companion object {
 
-        private const val ARG_NAME = "ARG_NAME"
-        private const val ARG_LINK = "ARG_LINK"
         private const val TIMEOUT_SHOW_MS = 60000
         private const val PREVIEW_VIDEO_MS = 1
 
-        fun newInstance(name: String, link: String) =
+        fun newInstance(link: String) =
             VideoFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_NAME, name)
-                    putString(ARG_LINK, link)
+                    putString(VideoViewModel.ARG_LINK, link)
                 }
             }
     }

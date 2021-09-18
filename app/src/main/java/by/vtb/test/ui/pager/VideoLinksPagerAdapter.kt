@@ -14,10 +14,7 @@ class VideoLinksPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         val nameAndLinkFromPos = getNameAndLinkFromPos(position)
-        return VideoFragment.newInstance(
-            name = nameAndLinkFromPos.first,
-            link = nameAndLinkFromPos.second
-        )
+        return VideoFragment.newInstance(nameAndLinkFromPos.second)
     }
 
     fun getNameAndLinkFromPos(position: Int): Pair<String, String> {

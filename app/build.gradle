@@ -14,7 +14,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
 
         buildConfigField "String", "BASE_URL", "\"https://89.208.230.60\""
     }
@@ -70,6 +70,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
     def dagger_version = "2.38.1"
     implementation "com.google.dagger:dagger:$dagger_version"

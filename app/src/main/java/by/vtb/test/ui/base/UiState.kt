@@ -1,4 +1,4 @@
-package by.vtb.test.ui
+package by.vtb.test.ui.base
 
 import retrofit2.HttpException
 import timber.log.Timber
