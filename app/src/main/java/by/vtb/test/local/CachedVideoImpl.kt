@@ -5,10 +5,12 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CachedVideoImpl @Inject constructor(private val context: Context) : CachedVideo {
 
-    override fun saveVideoInCache(filename: String, input: InputStream): String {
+    override suspend fun saveVideoInCache(filename: String, input: InputStream): String {
         val file = File(context.cacheDir, filename)
         val fos = FileOutputStream(file.absolutePath)
         fos.use { output ->
@@ -22,12 +24,12 @@ class CachedVideoImpl @Inject constructor(private val context: Context) : Cached
         return file.absolutePath
     }
 
-    override fun checkVideoInCache(filename: String): Boolean {
+    override suspend fun checkVideoInCache(filename: String): Boolean {
         val file = File(context.cacheDir, filename)
         return file.exists()
     }
 
-    override fun getVideoFromCache(filename: String): String {
+    override suspend fun getVideoFromCache(filename: String): String {
         val file = File(context.cacheDir, filename)
         return file.absolutePath
     }

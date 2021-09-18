@@ -3,6 +3,7 @@ package by.vtb.test.ui.video
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import by.vtb.test.di.MainDispatcher
 import by.vtb.test.di.vm.AssistedSavedStateViewModelFactory
 import by.vtb.test.repository.VideoRepository
 import by.vtb.test.ui.base.UiState
@@ -10,6 +11,7 @@ import by.vtb.test.ui.base.getUiState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class VideoViewModel @AssistedInject constructor(
     private val videoRepository: VideoRepository,
+    @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -28,7 +31,7 @@ class VideoViewModel @AssistedInject constructor(
         loadVideo()
     }
 
-    fun loadVideo() = viewModelScope.launch {
+    fun loadVideo() = viewModelScope.launch(mainDispatcher) {
         link.value?.let { videoUrl ->
             _uiState.value = UiState.Loading
             val result = getUiState {

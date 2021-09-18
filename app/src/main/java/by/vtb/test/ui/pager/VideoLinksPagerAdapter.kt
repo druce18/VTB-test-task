@@ -17,6 +17,9 @@ class VideoLinksPagerAdapter(
         return VideoFragment.newInstance(nameAndLinkFromPos.second)
     }
 
+    /**
+     * @return Pair (name, link)
+     */
     fun getNameAndLinkFromPos(position: Int): Pair<String, String> {
         return when (position) {
             0 -> Pair(SINGLE_NAME_TAB, videoLinks.single)

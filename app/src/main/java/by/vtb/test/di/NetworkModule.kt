@@ -1,6 +1,5 @@
 package by.vtb.test.di
 
-
 import by.vtb.test.BuildConfig
 import by.vtb.test.network.VideoService
 import dagger.Module

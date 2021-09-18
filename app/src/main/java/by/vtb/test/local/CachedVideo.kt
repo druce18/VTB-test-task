@@ -4,9 +4,9 @@ import java.io.InputStream
 
 interface CachedVideo {
 
-    fun saveVideoInCache(filename: String, input: InputStream): String
+    suspend fun saveVideoInCache(filename: String, input: InputStream): String
 
-    fun checkVideoInCache(filename: String): Boolean
+    suspend fun checkVideoInCache(filename: String): Boolean
 
-    fun getVideoFromCache(filename: String): String
+    suspend fun getVideoFromCache(filename: String): String
 }
