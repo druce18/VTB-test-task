@@ -5,28 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoLinksBinding
 import by.vtb.test.extention.appComponent
-import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
+import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.repository.model.VideoLinks
-import by.vtb.test.ui.UiState
+import by.vtb.test.ui.base.BaseFragment
+import by.vtb.test.ui.base.UiState
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
 
-class VideoLinksFragment : Fragment() {
+class VideoLinksFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: VideoLinksViewModel by viewModels { viewModelFactory }
-
+    private val viewModel: VideoLinksViewModel by viewModels()
     private var videoLinksAdapter: VideoLinksPagerAdapter? = null
     private var _binding: FragmentVideoLinksBinding? = null
     private val binding: FragmentVideoLinksBinding
@@ -35,14 +30,14 @@ class VideoLinksFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVideoLinksBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 showState(uiState)
             }
@@ -77,7 +72,7 @@ class VideoLinksFragment : Fragment() {
     private fun showError(uiState: UiState.Error) {
         with(binding) {
             progressBar.setGone()
-            videoLinksFragment.showSnackbarErrorIndefinite(R.string.error, R.string.refresh) {
+            videoLinksFragment.showSnackbarErrorIndefinite(uiState.message, R.string.refresh) {
                 viewModel.loadVideoLinks()
             }
         }

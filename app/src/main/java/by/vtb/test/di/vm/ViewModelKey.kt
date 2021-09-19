@@ -1,4 +1,4 @@
-package by.vtb.test.di
+package by.vtb.test.di.vm
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

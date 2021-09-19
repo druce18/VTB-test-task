@@ -1,8 +1,7 @@
 package by.vtb.test.di
 
-
 import by.vtb.test.BuildConfig
-import by.vtb.test.network.VideoLinksService
+import by.vtb.test.network.VideoService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -46,8 +45,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideVideoLinksService(retrofit: Retrofit): VideoLinksService {
-        return retrofit.create(VideoLinksService::class.java)
+    fun provideVideoService(retrofit: Retrofit): VideoService {
+        return retrofit.create(VideoService::class.java)
     }
 
     companion object {

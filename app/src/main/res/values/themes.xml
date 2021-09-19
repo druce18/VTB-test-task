@@ -17,6 +17,7 @@
 
     <style name="Widget.SnackBar" parent="Widget.MaterialComponents.Snackbar">
         <item name="android:layout_margin">4dp</item>
+        <item name="backgroundTint">@color/black</item>
     </style>
 
 </resources>
