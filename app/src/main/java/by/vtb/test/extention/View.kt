@@ -24,7 +24,7 @@ fun View.setGone() {
 
 fun View.showSnackbarErrorIndefinite(
     massage: String,
-    @StringRes nameAction: Int,
+    @StringRes nameAction: Int = R.string.close,
     action: (() -> Unit)? = null
 ) {
     val snackbar = Snackbar.make(this, massage, Snackbar.LENGTH_INDEFINITE)

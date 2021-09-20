@@ -57,7 +57,7 @@ class VideoFragment : BaseFragment() {
     private fun showState(uiState: UiState<String>) {
         when (uiState) {
             is UiState.Success -> {
-                setUri(uiState)
+                setUriVideo(uiState)
             }
             is UiState.Loading -> {
                 binding.progressBar.setVisible()
@@ -68,18 +68,18 @@ class VideoFragment : BaseFragment() {
         }
     }
 
-    private fun setUri(uiState: UiState.Success<String>) {
+    private fun setUriVideo(uiState: UiState.Success<String>) {
         with(binding) {
-            progressBar.setGone()
             val uri = Uri.parse(uiState.data)
             videoView.setVideoURI(uri)
+            progressBar.setGone()
         }
     }
 
     private fun showError(uiState: UiState.Error) {
         with(binding) {
+            videoFragment.showSnackbarErrorIndefinite(uiState.message)
             progressBar.setGone()
-            videoFragment.showSnackbarErrorIndefinite(uiState.message, R.string.close)
         }
     }
 
@@ -98,7 +98,7 @@ class VideoFragment : BaseFragment() {
                 mediaController.show(TIMEOUT_SHOW_MS)
             }
             videoView.setOnErrorListener { _, _, _ ->
-                videoView.showSnackbarErrorIndefinite(getString(R.string.error_loading), R.string.close)
+                videoView.showSnackbarErrorIndefinite(getString(R.string.error_loading))
                 true
             }
             videoFragment.setOnClickListener {
