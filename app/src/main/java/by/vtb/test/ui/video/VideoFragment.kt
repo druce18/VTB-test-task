@@ -1,15 +1,12 @@
 package by.vtb.test.ui.video
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoBinding
 import by.vtb.test.extention.appComponent
 import by.vtb.test.extention.setGone
@@ -17,14 +14,16 @@ import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.ui.base.BaseFragment
 import by.vtb.test.ui.base.UiState
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
 import kotlinx.coroutines.flow.collect
 
 class VideoFragment : BaseFragment() {
 
     private val viewModel: VideoViewModel by viewModels()
     private var _binding: FragmentVideoBinding? = null
-    private val binding: FragmentVideoBinding
-        get() = _binding!!
+    private val binding: FragmentVideoBinding get() = _binding!!
+    private var player: SimpleExoPlayer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,28 +35,23 @@ class VideoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        settingVideoView()
-        lifecycleScope.launchWhenStarted {
+        initializePlayer()
+        lifecycleScope.launchWhenResumed {
             viewModel.uiState.collect { uiState ->
                 showState(uiState)
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.loadVideo()
-    }
-
     override fun onPause() {
         super.onPause()
-        binding.videoView.setVideoURI(null)
+        player?.pause()
     }
 
     private fun showState(uiState: UiState<String>) {
         when (uiState) {
             is UiState.Success -> {
-                setUriVideo(uiState)
+                setVideo(uiState)
             }
             is UiState.Loading -> {
                 binding.progressBar.setVisible()
@@ -68,10 +62,10 @@ class VideoFragment : BaseFragment() {
         }
     }
 
-    private fun setUriVideo(uiState: UiState.Success<String>) {
+    private fun setVideo(uiState: UiState.Success<String>) {
         with(binding) {
-            val uri = Uri.parse(uiState.data)
-            videoView.setVideoURI(uri)
+            val mediaItem = MediaItem.fromUri(uiState.data)
+            player?.addMediaItem(mediaItem)
             progressBar.setGone()
         }
     }
@@ -83,28 +77,12 @@ class VideoFragment : BaseFragment() {
         }
     }
 
-    private fun settingVideoView() {
-        with(binding) {
-            videoView.requestFocus()
-            videoView.setZOrderOnTop(true)
-            val mediaController = MediaController(requireContext())
-            mediaController.setAnchorView(videoView)
-            videoView.setMediaController(mediaController)
-            videoView.setOnPreparedListener {
-                videoView.seekTo(PREVIEW_VIDEO_MS)
-                mediaController.show(TIMEOUT_SHOW_MS)
+    private fun initializePlayer() {
+        player = SimpleExoPlayer.Builder(requireContext())
+            .build()
+            .also { exoPlayer ->
+                binding.videoView.player = exoPlayer
             }
-            videoView.setOnCompletionListener {
-                mediaController.show(TIMEOUT_SHOW_MS)
-            }
-            videoView.setOnErrorListener { _, _, _ ->
-                videoView.showSnackbarErrorIndefinite(getString(R.string.error_loading))
-                true
-            }
-            videoFragment.setOnClickListener {
-                mediaController.show()
-            }
-        }
     }
 
     override fun onAttach(context: Context) {
@@ -115,12 +93,10 @@ class VideoFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        player = null
     }
 
     companion object {
-
-        private const val TIMEOUT_SHOW_MS = 60000
-        private const val PREVIEW_VIDEO_MS = 0
 
         fun newInstance(link: String) =
             VideoFragment().apply {
