@@ -10,4 +10,5 @@
     <color name="grey_light">#EEEEEE</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="red_error">#ff0033</color>
+    <color name="grey_dark">#A9A9A9</color>
 </resources>

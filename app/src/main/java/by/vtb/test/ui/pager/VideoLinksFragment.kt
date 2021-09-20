@@ -22,10 +22,9 @@ import kotlinx.coroutines.flow.collect
 class VideoLinksFragment : BaseFragment() {
 
     private val viewModel: VideoLinksViewModel by viewModels()
-    private var videoLinksAdapter: VideoLinksPagerAdapter? = null
     private var _binding: FragmentVideoLinksBinding? = null
-    private val binding: FragmentVideoLinksBinding
-        get() = _binding!!
+    private val binding: FragmentVideoLinksBinding get() = _binding!!
+    private var videoLinksAdapter: VideoLinksPagerAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,20 +60,20 @@ class VideoLinksFragment : BaseFragment() {
     private fun showPagerWithVideo(uiState: UiState.Success<VideoLinks>) {
         videoLinksAdapter = VideoLinksPagerAdapter(uiState.data, this)
         with(binding) {
-            progressBar.setGone()
             viewPager.adapter = videoLinksAdapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = videoLinksAdapter!!.getNameAndLinkFromPos(position).first
             }.attach()
+            progressBar.setGone()
         }
     }
 
     private fun showError(uiState: UiState.Error) {
         with(binding) {
-            progressBar.setGone()
             videoLinksFragment.showSnackbarErrorIndefinite(uiState.message, R.string.refresh) {
                 viewModel.loadVideoLinks()
             }
+            progressBar.setGone()
         }
     }
 
