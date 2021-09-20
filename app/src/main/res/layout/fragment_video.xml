@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:show_timeout="1500" />
+        app:show_timeout="1500"
+        app:shutter_background_color="@color/white" />
 
     <ProgressBar
         android:id="@+id/progressBar"
