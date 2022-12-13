@@ -1,10 +1,11 @@
-package by.vtb.test.repository
+package by.vtb.test.data
 
+import by.vtb.test.data.local.CachedVideo
+import by.vtb.test.data.network.VideoService
 import by.vtb.test.di.IoDispatcher
+import by.vtb.test.domain.VideoRepository
+import by.vtb.test.domain.model.VideoLinks
 import by.vtb.test.extention.nameFromUrl
-import by.vtb.test.local.CachedVideo
-import by.vtb.test.network.VideoService
-import by.vtb.test.repository.model.VideoLinks
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.io.InputStream

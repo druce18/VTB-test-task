@@ -1,6 +1,6 @@
-package by.vtb.test.network
+package by.vtb.test.data.network
 
-import by.vtb.test.network.model.ResultsVideoLinksPayload
+import by.vtb.test.data.network.model.ResultsVideoLinksPayload
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.GET

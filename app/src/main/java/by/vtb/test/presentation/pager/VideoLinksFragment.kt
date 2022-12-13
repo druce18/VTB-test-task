@@ -1,4 +1,4 @@
-package by.vtb.test.ui.pager
+package by.vtb.test.presentation.pager
 
 import android.content.Context
 import android.os.Bundle
@@ -13,11 +13,10 @@ import by.vtb.test.extention.appComponent
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
-import by.vtb.test.repository.model.VideoLinks
-import by.vtb.test.ui.base.BaseFragment
-import by.vtb.test.ui.base.UiState
+import by.vtb.test.domain.model.VideoLinks
+import by.vtb.test.presentation.base.BaseFragment
+import by.vtb.test.presentation.base.UiState
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.flow.collect
 
 class VideoLinksFragment : BaseFragment() {
 

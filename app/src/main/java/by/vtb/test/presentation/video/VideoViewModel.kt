@@ -1,13 +1,13 @@
-package by.vtb.test.ui.video
+package by.vtb.test.presentation.video
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import by.vtb.test.di.MainDispatcher
 import by.vtb.test.di.vm.AssistedSavedStateViewModelFactory
-import by.vtb.test.repository.VideoRepository
-import by.vtb.test.ui.base.UiState
-import by.vtb.test.ui.base.getUiState
+import by.vtb.test.domain.VideoRepository
+import by.vtb.test.presentation.base.UiState
+import by.vtb.test.presentation.base.getUiState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

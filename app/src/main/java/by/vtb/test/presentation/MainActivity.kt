@@ -1,4 +1,4 @@
-package by.vtb.test.ui
+package by.vtb.test.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import by.vtb.test.R

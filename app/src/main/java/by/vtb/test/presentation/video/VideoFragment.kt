@@ -1,4 +1,4 @@
-package by.vtb.test.ui.video
+package by.vtb.test.presentation.video
 
 import android.content.Context
 import android.os.Bundle
@@ -12,11 +12,10 @@ import by.vtb.test.extention.appComponent
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
-import by.vtb.test.ui.base.BaseFragment
-import by.vtb.test.ui.base.UiState
+import by.vtb.test.presentation.base.BaseFragment
+import by.vtb.test.presentation.base.UiState
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import kotlinx.coroutines.flow.collect
 
 class VideoFragment : BaseFragment() {
 

@@ -3,8 +3,8 @@ package by.vtb.test.di
 import androidx.lifecycle.ViewModel
 import by.vtb.test.di.vm.AssistedSavedStateViewModelFactory
 import by.vtb.test.di.vm.ViewModelKey
-import by.vtb.test.ui.pager.VideoLinksViewModel
-import by.vtb.test.ui.video.VideoViewModel
+import by.vtb.test.presentation.pager.VideoLinksViewModel
+import by.vtb.test.presentation.video.VideoViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

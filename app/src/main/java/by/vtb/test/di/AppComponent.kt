@@ -1,9 +1,9 @@
 package by.vtb.test.di
 
 import by.vtb.test.VtbTestApplication
-import by.vtb.test.ui.MainActivity
-import by.vtb.test.ui.pager.VideoLinksFragment
-import by.vtb.test.ui.video.VideoFragment
+import by.vtb.test.presentation.MainActivity
+import by.vtb.test.presentation.pager.VideoLinksFragment
+import by.vtb.test.presentation.video.VideoFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
