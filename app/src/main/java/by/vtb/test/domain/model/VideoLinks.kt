@@ -1,4 +1,4 @@
-package by.vtb.test.repository.model
+package by.vtb.test.domain.model
 
 data class VideoLinks(
     val single: String,

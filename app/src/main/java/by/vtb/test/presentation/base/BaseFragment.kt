@@ -1,4 +1,4 @@
-package by.vtb.test.ui.base
+package by.vtb.test.presentation.base
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider

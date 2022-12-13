@@ -1,7 +1,7 @@
 package by.vtb.test.di
 
 import by.vtb.test.BuildConfig
-import by.vtb.test.network.VideoService
+import by.vtb.test.data.network.VideoService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,9 +19,9 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder
-            .connectTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
-            .readTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
-            .writeTimeout(CONNECT_TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_IN_SEC, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_IN_SEC, TimeUnit.SECONDS)
             .hostnameVerifier { _, _ -> true }
 
         if (BuildConfig.DEBUG) {
@@ -51,6 +51,6 @@ class NetworkModule {
 
     companion object {
 
-        private const val CONNECT_TIMEOUT_IN_SEC = 10L
+        private const val TIMEOUT_IN_SEC = 10L
     }
 }

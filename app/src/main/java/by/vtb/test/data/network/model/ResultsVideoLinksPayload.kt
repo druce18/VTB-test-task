@@ -1,4 +1,4 @@
-package by.vtb.test.network.model
+package by.vtb.test.data.network.model
 
 import com.google.gson.annotations.SerializedName
 

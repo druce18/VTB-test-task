@@ -1,6 +1,6 @@
-package by.vtb.test.repository
+package by.vtb.test.domain
 
-import by.vtb.test.repository.model.VideoLinks
+import by.vtb.test.domain.model.VideoLinks
 
 interface VideoRepository {
 

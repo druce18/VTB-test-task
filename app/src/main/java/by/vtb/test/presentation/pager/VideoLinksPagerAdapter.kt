@@ -1,9 +1,9 @@
-package by.vtb.test.ui.pager
+package by.vtb.test.presentation.pager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import by.vtb.test.repository.model.VideoLinks
-import by.vtb.test.ui.video.VideoFragment
+import by.vtb.test.domain.model.VideoLinks
+import by.vtb.test.presentation.video.VideoFragment
 
 class VideoLinksPagerAdapter(
     private val videoLinks: VideoLinks,

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.video.VideoFragment">
+    tools:context=".presentation.video.VideoFragment">
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/videoView"

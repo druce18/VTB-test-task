@@ -1,4 +1,4 @@
-package by.vtb.test.local
+package by.vtb.test.data.local
 
 import android.content.Context
 import java.io.File

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/videoLinksFragment"
-        android:name="by.vtb.test.ui.pager.VideoLinksFragment"
+        android:name="by.vtb.test.presentation.pager.VideoLinksFragment"
         android:label="fragment_video_links"
         tools:layout="@layout/fragment_video_links" />
 

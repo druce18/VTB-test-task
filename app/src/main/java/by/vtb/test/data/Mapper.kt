@@ -1,7 +1,7 @@
-package by.vtb.test.repository
+package by.vtb.test.data
 
-import by.vtb.test.network.model.ResultsVideoLinksPayload
-import by.vtb.test.repository.model.VideoLinks
+import by.vtb.test.data.network.model.ResultsVideoLinksPayload
+import by.vtb.test.domain.model.VideoLinks
 import javax.inject.Inject
 import javax.inject.Singleton
 

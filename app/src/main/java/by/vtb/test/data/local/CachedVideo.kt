@@ -1,4 +1,4 @@
-package by.vtb.test.local
+package by.vtb.test.data.local
 
 import java.io.InputStream
 
