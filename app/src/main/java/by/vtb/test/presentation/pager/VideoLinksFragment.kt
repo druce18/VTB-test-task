@@ -9,28 +9,32 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import by.vtb.test.R
 import by.vtb.test.databinding.FragmentVideoLinksBinding
+import by.vtb.test.domain.model.VideoLinks
 import by.vtb.test.extention.appComponent
 import by.vtb.test.extention.setGone
 import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
-import by.vtb.test.domain.model.VideoLinks
 import by.vtb.test.presentation.base.BaseFragment
 import by.vtb.test.presentation.base.UiState
 import com.google.android.material.tabs.TabLayoutMediator
 
-class VideoLinksFragment : BaseFragment() {
+
+class VideoLinksFragment : BaseFragment<FragmentVideoLinksBinding>() {
 
     private val viewModel: VideoLinksViewModel by viewModels()
-    private var _binding: FragmentVideoLinksBinding? = null
-    private val binding: FragmentVideoLinksBinding get() = _binding!!
     private var videoLinksAdapter: VideoLinksPagerAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentVideoLinksBinding.inflate(inflater, container, false)
-        return binding.root
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
+
+    override fun setupViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentVideoLinksBinding {
+        return FragmentVideoLinksBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +44,11 @@ class VideoLinksFragment : BaseFragment() {
                 showState(uiState)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        videoLinksAdapter = null
     }
 
     private fun showState(uiState: UiState<VideoLinks>) {
@@ -74,17 +83,6 @@ class VideoLinksFragment : BaseFragment() {
             }
             progressBar.setGone()
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        context.appComponent.inject(this)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        videoLinksAdapter = null
     }
 
     companion object {
