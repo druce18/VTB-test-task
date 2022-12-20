@@ -15,7 +15,6 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder
@@ -33,7 +32,6 @@ class NetworkModule {
         return builder.build()
     }
 
-    @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()

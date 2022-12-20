@@ -14,22 +14,26 @@ import by.vtb.test.extention.setVisible
 import by.vtb.test.extention.showSnackbarErrorIndefinite
 import by.vtb.test.presentation.base.BaseFragment
 import by.vtb.test.presentation.base.UiState
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
 
-class VideoFragment : BaseFragment() {
+
+class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
     private val viewModel: VideoViewModel by viewModels()
-    private var _binding: FragmentVideoBinding? = null
-    private val binding: FragmentVideoBinding get() = _binding!!
-    private var player: SimpleExoPlayer? = null
+    private var player: ExoPlayer? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentVideoBinding.inflate(inflater, container, false)
-        return binding.root
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
+
+    override fun setupViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentVideoBinding {
+        return FragmentVideoBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +49,11 @@ class VideoFragment : BaseFragment() {
     override fun onPause() {
         super.onPause()
         player?.pause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        player = null
     }
 
     private fun showState(uiState: UiState<String>) {
@@ -77,31 +86,19 @@ class VideoFragment : BaseFragment() {
     }
 
     private fun initializePlayer() {
-        player = SimpleExoPlayer.Builder(requireContext())
+        player = ExoPlayer.Builder(requireContext())
             .build()
             .also { exoPlayer ->
                 binding.videoView.player = exoPlayer
             }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        context.appComponent.inject(this)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        player = null
-    }
-
     companion object {
 
-        fun newInstance(link: String) =
-            VideoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(VideoViewModel.ARG_LINK, link)
-                }
+        fun newInstance(link: String) = VideoFragment().apply {
+            arguments = Bundle().apply {
+                putString(VideoViewModel.ARG_LINK, link)
             }
+        }
     }
 }
